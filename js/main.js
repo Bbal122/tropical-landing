@@ -195,11 +195,18 @@ function setupHeroVideoScrub() {
 
   if (!video || !hero) return;
 
+  // Force video load on mobile
   video.pause();
+  video.setAttribute('muted', '');
+  video.muted = true;
+  video.load();
 
+  let scrubInitialized = false;
   const initScrub = () => {
+    if (scrubInitialized) return;
     const duration = video.duration;
     if (!duration || isNaN(duration)) return;
+    scrubInitialized = true;
 
     // Pin the hero and create a long scroll zone
     const isMobile = window.innerWidth <= 768;
@@ -301,6 +308,13 @@ function setupHeroVideoScrub() {
     initScrub();
   } else {
     video.addEventListener('loadedmetadata', initScrub);
+    // Fallback: retry after a delay for mobile browsers that are slow to load
+    video.addEventListener('canplay', initScrub, { once: true });
+    // Touch to wake video on mobile
+    document.addEventListener('touchstart', function mobileVideoWake() {
+      video.load();
+      document.removeEventListener('touchstart', mobileVideoWake);
+    }, { once: true });
   }
 
   // Canvas fallback for file:// protocol
