@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tropical Oman — 100% Omani Since 1999</title>
+  <meta name="description" content="Fresh Juices. Handmade Ice Cream. Pure Goodness. 25+ locations across Oman.">
+  <link rel="icon" href="assets/images/logo.png" type="image/png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" defer></script>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== LOADING SCREEN ===== -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <img src="assets/images/logo.png" alt="Tropical Oman" class="loader-logo">
+    </div>
+  </div>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="assets/images/logo.png" alt="Tropical Oman" width="130" height="45">
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" data-en="Home" data-ar="الرئيسية">Home</a></li>
+        <li><a href="#about" data-en="About" data-ar="عن تروبيكال">About</a></li>
+        <li><a href="#products" data-en="Menu" data-ar="القائمة">Menu</a></li>
+        <li><a href="#locations" data-en="Locations" data-ar="الفروع">Locations</a></li>
+        <li><a href="https://tropicaloman.com/gallery/" target="_blank" data-en="Gallery" data-ar="المعرض">Gallery</a></li>
+        <li><a href="https://tropicaloman.com/franchise/" target="_blank" data-en="Franchise" data-ar="الامتياز">Franchise</a></li>
+        <li><a href="https://tropicaloman.com/contact/" target="_blank" data-en="Contact" data-ar="تواصل معنا">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="lang-toggle" id="langToggle" aria-label="Toggle Language">
+          <span class="lang-en">عربي</span>
+          <span class="lang-ar" style="display:none">EN</span>
+        </button>
+        <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO WITH VIDEO BACKGROUND ===== -->
+  <section class="hero" id="hero">
+    <video id="scrollVideo" class="hero-video" src="assets/video/Fruit_Explosion_Video_Tropical.mp4" muted playsinline preload="auto"></video>
+    <div class="hero-video-overlay"></div>
+    <div class="hero-inner" id="heroInner">
+      <div class="hero-content">
+        <h1 class="hero-headline" data-en="100% Omani Since 1999" data-ar="عماني ١٠٠٪ منذ ١٩٩٩">
+          <span class="word-wrap"><span class="word">100%</span></span>
+          <span class="word-wrap"><span class="word">Omani</span></span>
+          <span class="word-wrap"><span class="word">Since</span></span>
+          <span class="word-wrap"><span class="word">1999</span></span>
+        </h1>
+        <p class="hero-tagline" data-en="Fresh Juices. Handmade Ice Cream. Pure Goodness." data-ar="عصائر طازجة. آيس كريم يدوي. طعم نقي.">Fresh Juices. Handmade Ice Cream. Pure Goodness.</p>
+        <a href="#products" class="btn-primary" data-en="Explore Our Menu" data-ar="استكشف قائمتنا">Explore Our Menu</a>
+      </div>
+    </div>
+    <div class="video-overlay">
+      <p class="video-text video-text-1" data-en="Bursting with Flavor" data-ar="مليء بالنكهة">Bursting with Flavor</p>
+      <p class="video-text video-text-2" data-en="Made from Real Fruit" data-ar="مصنوع من فواكه حقيقية">Made from Real Fruit</p>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== BRAND STRIP ===== -->
+  <section class="brand-strip" id="brandStrip">
+    <div class="container">
+      <div class="strip-line"></div>
+      <p class="strip-text" data-en="No Gimmicks. Only Freshness." data-ar="بلا حيل. فقط طازج.">No Gimmicks. Only Freshness.</p>
+      <div class="strip-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== PRODUCT SHOWCASE ===== -->
+  <section class="products" id="products">
+    <div class="container">
+      <h2 class="section-title" data-en="Our Menu" data-ar="قائمتنا">Our Menu</h2>
+      <div class="products-grid">
+        <a href="https://tropicaloman.com/menu/" target="_blank" class="product-card">
+          <div class="product-card-img">
+            <img src="assets/images/orange123.png" alt="Fresh Juices" loading="lazy">
+          </div>
+          <h3 data-en="Fresh Juices" data-ar="عصائر طازجة">Fresh Juices</h3>
+          <p data-en="Freshly squeezed from 100% real fruit, every single glass." data-ar="معصورة طازجة من فواكه حقيقية ١٠٠٪، كل كوب.">Freshly squeezed from 100% real fruit, every single glass.</p>
+        </a>
+        <a href="https://tropicaloman.com/menu/" target="_blank" class="product-card">
+          <div class="product-card-img">
+            <img src="assets/images/ice-cream.png" alt="Ice Cream" loading="lazy">
+          </div>
+          <h3 data-en="Ice Cream" data-ar="آيس كريم">Ice Cream</h3>
+          <p data-en="Handmade ice cream crafted with traditional Omani recipes." data-ar="آيس كريم يدوي مصنوع بوصفات عمانية تقليدية.">Handmade ice cream crafted with traditional Omani recipes.</p>
+        </a>
+        <a href="https://tropicaloman.com/menu/" target="_blank" class="product-card">
+          <div class="product-card-img">
+            <img src="assets/images/shake-new21.png" alt="Smoothies & Shakes" loading="lazy">
+          </div>
+          <h3 data-en="Smoothies & Shakes" data-ar="سموذي وميلك شيك">Smoothies & Shakes</h3>
+          <p data-en="Thick, creamy blends packed with real fruit and flavor." data-ar="مزيج كريمي سميك مليء بالفواكه الحقيقية والنكهة.">Thick, creamy blends packed with real fruit and flavor.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SIGNATURE MARQUEE ===== -->
+  <section class="marquee-section" id="marquee">
+    <h2 class="section-title" data-en="Signature Items" data-ar="الأصناف المميزة">Signature Items</h2>
+    <div class="marquee-track-wrapper">
+      <div class="marquee-track" id="marqueeTrack">
+        <div class="marquee-item">
+          <img src="assets/images/Royal-Faluda.png" alt="Royal Faluda" loading="lazy">
+          <span data-en="Royal Faluda" data-ar="فالودة ملكية">Royal Faluda</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/salad.png" alt="Fruit Salad" loading="lazy">
+          <span data-en="Fruit Salad" data-ar="سلطة فواكه">Fruit Salad</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/shiak1.jpg" alt="Mango Milkshake" loading="lazy">
+          <span data-en="Mango Milkshake" data-ar="ميلك شيك مانجو">Mango Milkshake</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/thick-shake-chocolate.png" alt="Chocolate Shake" loading="lazy">
+          <span data-en="Chocolate Shake" data-ar="شيك شوكولاتة">Chocolate Shake</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/fruit-oat-smoothie.png" alt="Fruit Oat Smoothie" loading="lazy">
+          <span data-en="Fruit Oat Smoothie" data-ar="سموذي فواكه وشوفان">Fruit Oat Smoothie</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/tropicals.png" alt="Tropical Special" loading="lazy">
+          <span data-en="Tropical Special" data-ar="تروبيكال سبيشل">Tropical Special</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/salad-slider-1-scaled.jpg" alt="Fresh Selection" loading="lazy">
+          <span data-en="Fresh Selection" data-ar="تشكيلة طازجة">Fresh Selection</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/orange123.png" alt="Fresh Orange" loading="lazy">
+          <span data-en="Fresh Orange" data-ar="برتقال طازج">Fresh Orange</span>
+        </div>
+        <!-- Duplicated for seamless loop -->
+        <div class="marquee-item">
+          <img src="assets/images/Royal-Faluda.png" alt="Royal Faluda" loading="lazy">
+          <span data-en="Royal Faluda" data-ar="فالودة ملكية">Royal Faluda</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/salad.png" alt="Fruit Salad" loading="lazy">
+          <span data-en="Fruit Salad" data-ar="سلطة فواكه">Fruit Salad</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/shiak1.jpg" alt="Mango Milkshake" loading="lazy">
+          <span data-en="Mango Milkshake" data-ar="ميلك شيك مانجو">Mango Milkshake</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/thick-shake-chocolate.png" alt="Chocolate Shake" loading="lazy">
+          <span data-en="Chocolate Shake" data-ar="شيك شوكولاتة">Chocolate Shake</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/fruit-oat-smoothie.png" alt="Fruit Oat Smoothie" loading="lazy">
+          <span data-en="Fruit Oat Smoothie" data-ar="سموذي فواكه وشوفان">Fruit Oat Smoothie</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/tropicals.png" alt="Tropical Special" loading="lazy">
+          <span data-en="Tropical Special" data-ar="تروبيكال سبيشل">Tropical Special</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/salad-slider-1-scaled.jpg" alt="Fresh Selection" loading="lazy">
+          <span data-en="Fresh Selection" data-ar="تشكيلة طازجة">Fresh Selection</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/orange123.png" alt="Fresh Orange" loading="lazy">
+          <span data-en="Fresh Orange" data-ar="برتقال طازج">Fresh Orange</span>
+        </div>
+      </div>
+    </div>
+    <!-- Reverse marquee row -->
+    <div class="marquee-track-wrapper marquee-reverse-wrapper">
+      <div class="marquee-track marquee-reverse" id="marqueeTrackReverse">
+        <div class="marquee-item">
+          <img src="assets/images/tropicals.png" alt="Tropical Special" loading="lazy">
+          <span data-en="Tropical Special" data-ar="تروبيكال سبيشل">Tropical Special</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/Royal-Faluda.png" alt="Royal Faluda" loading="lazy">
+          <span data-en="Royal Faluda" data-ar="فالودة ملكية">Royal Faluda</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/thick-shake-chocolate.png" alt="Chocolate Shake" loading="lazy">
+          <span data-en="Chocolate Shake" data-ar="شيك شوكولاتة">Chocolate Shake</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/salad.png" alt="Fruit Salad" loading="lazy">
+          <span data-en="Fruit Salad" data-ar="سلطة فواكه">Fruit Salad</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/orange123.png" alt="Fresh Orange" loading="lazy">
+          <span data-en="Fresh Orange" data-ar="برتقال طازج">Fresh Orange</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/fruit-oat-smoothie.png" alt="Fruit Oat Smoothie" loading="lazy">
+          <span data-en="Fruit Oat Smoothie" data-ar="سموذي فواكه وشوفان">Fruit Oat Smoothie</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/shiak1.jpg" alt="Mango Milkshake" loading="lazy">
+          <span data-en="Mango Milkshake" data-ar="ميلك شيك مانجو">Mango Milkshake</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/salad-slider-1-scaled.jpg" alt="Fresh Selection" loading="lazy">
+          <span data-en="Fresh Selection" data-ar="تشكيلة طازجة">Fresh Selection</span>
+        </div>
+        <!-- Duplicated for seamless loop -->
+        <div class="marquee-item">
+          <img src="assets/images/tropicals.png" alt="Tropical Special" loading="lazy">
+          <span data-en="Tropical Special" data-ar="تروبيكال سبيشل">Tropical Special</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/Royal-Faluda.png" alt="Royal Faluda" loading="lazy">
+          <span data-en="Royal Faluda" data-ar="فالودة ملكية">Royal Faluda</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/thick-shake-chocolate.png" alt="Chocolate Shake" loading="lazy">
+          <span data-en="Chocolate Shake" data-ar="شيك شوكولاتة">Chocolate Shake</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/salad.png" alt="Fruit Salad" loading="lazy">
+          <span data-en="Fruit Salad" data-ar="سلطة فواكه">Fruit Salad</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/orange123.png" alt="Fresh Orange" loading="lazy">
+          <span data-en="Fresh Orange" data-ar="برتقال طازج">Fresh Orange</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/fruit-oat-smoothie.png" alt="Fruit Oat Smoothie" loading="lazy">
+          <span data-en="Fruit Oat Smoothie" data-ar="سموذي فواكه وشوفان">Fruit Oat Smoothie</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/shiak1.jpg" alt="Mango Milkshake" loading="lazy">
+          <span data-en="Mango Milkshake" data-ar="ميلك شيك مانجو">Mango Milkshake</span>
+        </div>
+        <div class="marquee-item">
+          <img src="assets/images/salad-slider-1-scaled.jpg" alt="Fresh Selection" loading="lazy">
+          <span data-en="Fresh Selection" data-ar="تشكيلة طازجة">Fresh Selection</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== ABOUT / HERITAGE ===== -->
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div class="about-image">
+        <img src="assets/images/about.jpg" alt="Tropical Oman Heritage" loading="lazy">
+      </div>
+      <div class="about-content">
+        <span class="about-label" data-en="Tropical-osophy" data-ar="فلسفة تروبيكال">Tropical-osophy</span>
+        <h2 data-en="25+ Years of Fresh Tradition" data-ar="أكثر من ٢٥ عامًا من التقاليد الطازجة">25+ Years of Fresh Tradition</h2>
+        <p data-en="Since 1999, Tropical has been Oman's home for freshly made juices, handmade ice cream, and authentic flavors. What started as a single shop has grown into a beloved brand with over 25 locations — all while staying true to our promise: 100% fresh, 100% Omani." data-ar="منذ عام ١٩٩٩، كانت تروبيكال الوجهة المفضلة في عمان للعصائر الطازجة والآيس كريم اليدوي والنكهات الأصيلة. ما بدأ كمحل واحد نما ليصبح علامة تجارية محبوبة بأكثر من ٢٥ فرعًا — مع الحفاظ على وعدنا: ١٠٠٪ طازج، ١٠٠٪ عماني.">Since 1999, Tropical has been Oman's home for freshly made juices, handmade ice cream, and authentic flavors. What started as a single shop has grown into a beloved brand with over 25 locations — all while staying true to our promise: 100% fresh, 100% Omani.</p>
+        <div class="about-counters">
+          <div class="counter" data-target="25">
+            <span class="counter-number">0</span><span class="counter-suffix">+</span>
+            <span class="counter-label" data-en="Years" data-ar="سنة">Years</span>
+          </div>
+          <div class="counter" data-target="25">
+            <span class="counter-number">0</span><span class="counter-suffix">+</span>
+            <span class="counter-label" data-en="Locations" data-ar="فرع">Locations</span>
+          </div>
+          <div class="counter" data-target="100">
+            <span class="counter-number">0</span><span class="counter-suffix">+</span>
+            <span class="counter-label" data-en="Products" data-ar="منتج">Products</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LOCATIONS ===== -->
+  <section class="locations" id="locations">
+    <div class="container">
+      <h2 class="section-title" data-en="Find Us Across Oman" data-ar="اعثر علينا في أنحاء عمان">Find Us Across Oman</h2>
+      <p class="locations-subtitle" data-en="25+ locations serving fresh goodness daily" data-ar="أكثر من ٢٥ فرعًا يقدم الطازج يوميًا">25+ locations serving fresh goodness daily</p>
+      <div class="locations-grid">
+        <div class="location-card">
+          <h4 data-en="Muscat — Al Khuwair" data-ar="مسقط — الخوير">Muscat — Al Khuwair</h4>
+          <p class="location-hours" data-en="Open daily: 8 AM – 12 AM" data-ar="يوميًا: ٨ صباحًا – ١٢ منتصف الليل">Open daily: 8 AM – 12 AM</p>
+        </div>
+        <div class="location-card">
+          <h4 data-en="Muscat — Qurum" data-ar="مسقط — القرم">Muscat — Qurum</h4>
+          <p class="location-hours" data-en="Open daily: 8 AM – 12 AM" data-ar="يوميًا: ٨ صباحًا – ١٢ منتصف الليل">Open daily: 8 AM – 12 AM</p>
+        </div>
+        <div class="location-card">
+          <h4 data-en="Salalah — Al Saada" data-ar="صلالة — السعادة">Salalah — Al Saada</h4>
+          <p class="location-hours" data-en="Open daily: 9 AM – 11 PM" data-ar="يوميًا: ٩ صباحًا – ١١ مساءً">Open daily: 9 AM – 11 PM</p>
+        </div>
+        <div class="location-card">
+          <h4 data-en="Sohar — City Center" data-ar="صحار — وسط المدينة">Sohar — City Center</h4>
+          <p class="location-hours" data-en="Open daily: 9 AM – 11 PM" data-ar="يوميًا: ٩ صباحًا – ١١ مساءً">Open daily: 9 AM – 11 PM</p>
+        </div>
+      </div>
+      <a href="#" class="btn-secondary" data-en="View All Locations" data-ar="عرض جميع الفروع">View All Locations</a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="assets/images/logo.png" alt="Tropical Oman" width="140" height="48">
+        <p data-en="100% Omani Since 1999" data-ar="عماني ١٠٠٪ منذ ١٩٩٩">100% Omani Since 1999</p>
+      </div>
+      <div class="footer-links">
+        <h4 data-en="Quick Links" data-ar="روابط سريعة">Quick Links</h4>
+        <ul>
+          <li><a href="#hero" data-en="Home" data-ar="الرئيسية">Home</a></li>
+          <li><a href="#products" data-en="Menu" data-ar="القائمة">Menu</a></li>
+          <li><a href="#about" data-en="About" data-ar="عن تروبيكال">About</a></li>
+          <li><a href="#locations" data-en="Locations" data-ar="الفروع">Locations</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4 data-en="Contact" data-ar="تواصل معنا">Contact</h4>
+        <p data-en="Corporate Office, Muscat, Oman" data-ar="المكتب الرئيسي، مسقط، عمان">Corporate Office, Muscat, Oman</p>
+        <p>info@tropicaloman.com</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/tropicaloman/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://twitter.com/tropicaloman" target="_blank" rel="noopener" aria-label="Twitter">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-1.3.8-2.8 1.2A4.4 4.4 0 0015.5 3c-2.5 0-4.5 2-4.5 4.5 0 .3 0 .7.1 1C7.7 8.3 4.1 6.5 1.7 3.7c-.4.7-.6 1.5-.6 2.3 0 1.6.8 2.9 2 3.7-.7 0-1.4-.2-2-.5v.1c0 2.2 1.6 4 3.6 4.4-.4.1-.8.2-1.2.2-.3 0-.6 0-.9-.1.6 2 2.4 3.4 4.6 3.4A9 9 0 012 19.5 12.7 12.7 0 008.3 21c7.5 0 11.7-6.3 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2.2z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/tropicaloman" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Tropical Oman. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
