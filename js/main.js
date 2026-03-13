@@ -552,7 +552,7 @@ function setupMarqueeDrag() {
       isDragging = true;
       startX = x;
       currentTranslateX = getTranslateX();
-      track.style.animationPlayState = 'paused';
+      track.style.animation = 'none';
       track.style.transform = `translateX(${currentTranslateX}px)`;
     }
 
@@ -566,8 +566,8 @@ function setupMarqueeDrag() {
       if (!isDragging) return;
       isDragging = false;
       // Clear inline styles to let CSS animation resume
+      track.style.animation = '';
       track.style.transform = '';
-      track.style.animationPlayState = '';
     }
 
     wrapper.addEventListener('touchstart', (e) => {
