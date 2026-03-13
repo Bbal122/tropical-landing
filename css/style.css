@@ -834,6 +834,15 @@ a.product-card {
 
   .product-card-img { height: 240px; }
 
+  .marquee-track-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .marquee-track-wrapper::-webkit-scrollbar { display: none; }
+
   .marquee-item { width: 140px; }
   .marquee-item img { width: 140px; height: 140px; }
   .marquee-track { gap: 24px; }

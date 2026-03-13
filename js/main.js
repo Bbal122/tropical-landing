@@ -534,10 +534,39 @@ function setupSectionTitles() {
 
 /* ========== MARQUEE TOUCH/DRAG SCROLL ========== */
 function setupMarqueeDrag() {
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
   document.querySelectorAll('.marquee-track-wrapper').forEach(wrapper => {
     const track = wrapper.querySelector('.marquee-track');
     if (!track) return;
 
+    if (isTouchDevice) {
+      // Mobile: use native scroll, pause animation while scrolling
+      let resumeTimer = null;
+
+      wrapper.addEventListener('touchstart', () => {
+        clearTimeout(resumeTimer);
+        track.style.animationPlayState = 'paused';
+      }, { passive: true });
+
+      wrapper.addEventListener('touchend', () => {
+        resumeTimer = setTimeout(() => {
+          track.style.animationPlayState = '';
+        }, 1500);
+      });
+
+      wrapper.addEventListener('scroll', () => {
+        clearTimeout(resumeTimer);
+        track.style.animationPlayState = 'paused';
+        resumeTimer = setTimeout(() => {
+          track.style.animationPlayState = '';
+        }, 1500);
+      }, { passive: true });
+
+      return;
+    }
+
+    // Desktop: drag to scroll (existing behavior)
     let isDragging = false;
     let startX = 0;
     let currentTranslateX = 0;
@@ -565,20 +594,9 @@ function setupMarqueeDrag() {
     function onEnd() {
       if (!isDragging) return;
       isDragging = false;
-      // Clear inline styles to let CSS animation resume
       track.style.animation = '';
       track.style.transform = '';
     }
-
-    wrapper.addEventListener('touchstart', (e) => {
-      onStart(e.touches[0].clientX);
-    }, { passive: true });
-
-    wrapper.addEventListener('touchmove', (e) => {
-      onMove(e.touches[0].clientX);
-    }, { passive: true });
-
-    wrapper.addEventListener('touchend', onEnd);
 
     wrapper.addEventListener('mousedown', (e) => {
       e.preventDefault();
