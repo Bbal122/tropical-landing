@@ -119,6 +119,7 @@ function initAll() {
     setupCounters();
     setupLocations();
     setupSectionTitles();
+    setupMarqueeDrag();
   });
 }
 
@@ -201,12 +202,19 @@ function setupHeroVideoScrub() {
   video.muted = true;
   video.load();
 
+  // Play-then-pause trick to force mobile browsers to buffer
+  video.play().then(() => {
+    video.pause();
+    video.currentTime = 0;
+  }).catch(() => {});
+
   let scrubInitialized = false;
   const initScrub = () => {
     if (scrubInitialized) return;
     const duration = video.duration;
     if (!duration || isNaN(duration)) return;
     scrubInitialized = true;
+    video.classList.add('video-ready');
 
     // Pin the hero and create a long scroll zone
     const isMobile = window.innerWidth <= 768;
@@ -310,12 +318,21 @@ function setupHeroVideoScrub() {
     video.addEventListener('loadedmetadata', initScrub);
     // Fallback: retry after a delay for mobile browsers that are slow to load
     video.addEventListener('canplay', initScrub, { once: true });
+    video.addEventListener('canplaythrough', initScrub, { once: true });
     // Touch to wake video on mobile
     document.addEventListener('touchstart', function mobileVideoWake() {
       video.load();
+      video.addEventListener('loadedmetadata', initScrub, { once: true });
       document.removeEventListener('touchstart', mobileVideoWake);
     }, { once: true });
   }
+
+  // 5-second timeout fallback — show poster if video never loads
+  setTimeout(() => {
+    if (!scrubInitialized) {
+      video.classList.add('video-fallback');
+    }
+  }, 5000);
 
   // Canvas fallback for file:// protocol
   if (window.location.protocol === 'file:') {
@@ -512,6 +529,67 @@ function setupSectionTitles() {
         toggleActions: 'play none none reverse',
       }
     });
+  });
+}
+
+/* ========== MARQUEE TOUCH/DRAG SCROLL ========== */
+function setupMarqueeDrag() {
+  document.querySelectorAll('.marquee-track-wrapper').forEach(wrapper => {
+    const track = wrapper.querySelector('.marquee-track');
+    if (!track) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslateX = 0;
+
+    function getTranslateX() {
+      const style = getComputedStyle(track);
+      const matrix = new DOMMatrix(style.transform);
+      return matrix.m41;
+    }
+
+    function onStart(x) {
+      isDragging = true;
+      startX = x;
+      currentTranslateX = getTranslateX();
+      track.style.animationPlayState = 'paused';
+      track.style.transform = `translateX(${currentTranslateX}px)`;
+    }
+
+    function onMove(x) {
+      if (!isDragging) return;
+      const delta = x - startX;
+      track.style.transform = `translateX(${currentTranslateX + delta}px)`;
+    }
+
+    function onEnd() {
+      if (!isDragging) return;
+      isDragging = false;
+      // Clear inline styles to let CSS animation resume
+      track.style.transform = '';
+      track.style.animationPlayState = '';
+    }
+
+    wrapper.addEventListener('touchstart', (e) => {
+      onStart(e.touches[0].clientX);
+    }, { passive: true });
+
+    wrapper.addEventListener('touchmove', (e) => {
+      onMove(e.touches[0].clientX);
+    }, { passive: true });
+
+    wrapper.addEventListener('touchend', onEnd);
+
+    wrapper.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      onStart(e.clientX);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      onMove(e.clientX);
+    });
+
+    window.addEventListener('mouseup', onEnd);
   });
 }
 

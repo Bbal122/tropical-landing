@@ -204,6 +204,11 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   border-radius: 12px;
 }
 
+.hero-video.video-ready,
+.hero-video.video-fallback {
+  opacity: 1;
+}
+
 .hero-video-overlay {
   position: absolute;
   inset: 0;
@@ -448,6 +453,13 @@ a.product-card {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
   mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.marquee-track-wrapper:active {
+  cursor: grabbing;
 }
 
 .marquee-reverse-wrapper {
