@@ -540,28 +540,77 @@ function setupMarqueeDrag() {
     const track = wrapper.querySelector('.marquee-track');
     if (!track) return;
 
-    if (isTouchDevice) {
-      // Mobile: use native scroll, pause animation while scrolling
-      let resumeTimer = null;
+    function getTranslateX() {
+      const style = getComputedStyle(track);
+      const matrix = new DOMMatrix(style.transform);
+      return matrix.m41;
+    }
 
-      wrapper.addEventListener('touchstart', () => {
-        clearTimeout(resumeTimer);
-        track.style.animationPlayState = 'paused';
+    if (isTouchDevice) {
+      // Mobile: touch-drag with momentum, then resume CSS animation
+      let touchStartX = 0;
+      let touchCurrentX = 0;
+      let trackX = 0;
+      let isTouching = false;
+      let lastTouches = []; // {x, t} for velocity calc
+
+      wrapper.addEventListener('touchstart', (e) => {
+        isTouching = true;
+        touchStartX = e.touches[0].clientX;
+        trackX = getTranslateX();
+        track.style.animation = 'none';
+        track.style.transform = `translateX(${trackX}px)`;
+        lastTouches = [{ x: touchStartX, t: Date.now() }];
+      }, { passive: true });
+
+      wrapper.addEventListener('touchmove', (e) => {
+        if (!isTouching) return;
+        touchCurrentX = e.touches[0].clientX;
+        const delta = touchCurrentX - touchStartX;
+        track.style.transform = `translateX(${trackX + delta}px)`;
+        const now = Date.now();
+        lastTouches.push({ x: touchCurrentX, t: now });
+        if (lastTouches.length > 4) lastTouches.shift();
       }, { passive: true });
 
       wrapper.addEventListener('touchend', () => {
-        resumeTimer = setTimeout(() => {
-          track.style.animationPlayState = '';
-        }, 1500);
-      });
+        if (!isTouching) return;
+        isTouching = false;
 
-      wrapper.addEventListener('scroll', () => {
-        clearTimeout(resumeTimer);
-        track.style.animationPlayState = 'paused';
-        resumeTimer = setTimeout(() => {
-          track.style.animationPlayState = '';
-        }, 1500);
-      }, { passive: true });
+        // Calculate velocity from recent touch points
+        let velocity = 0;
+        if (lastTouches.length >= 2) {
+          const first = lastTouches[0];
+          const last = lastTouches[lastTouches.length - 1];
+          const dt = last.t - first.t;
+          if (dt > 0) velocity = (last.x - first.x) / dt; // px/ms
+        }
+
+        // Momentum coast
+        const friction = 0.95;
+        let currentX = getTranslateX();
+
+        function coast() {
+          velocity *= friction;
+          if (Math.abs(velocity) < 0.5 / 16) { // < 0.5px per frame
+            // Resume CSS animation
+            track.style.animation = '';
+            track.style.transform = '';
+            return;
+          }
+          currentX += velocity * 16; // ~16ms per frame
+          track.style.transform = `translateX(${currentX}px)`;
+          requestAnimationFrame(coast);
+        }
+
+        if (Math.abs(velocity) > 0.02) {
+          requestAnimationFrame(coast);
+        } else {
+          // No meaningful velocity, resume immediately
+          track.style.animation = '';
+          track.style.transform = '';
+        }
+      });
 
       return;
     }
@@ -570,12 +619,6 @@ function setupMarqueeDrag() {
     let isDragging = false;
     let startX = 0;
     let currentTranslateX = 0;
-
-    function getTranslateX() {
-      const style = getComputedStyle(track);
-      const matrix = new DOMMatrix(style.transform);
-      return matrix.m41;
-    }
 
     function onStart(x) {
       isDragging = true;
